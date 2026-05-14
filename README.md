@@ -1,0 +1,40 @@
+<<<<<<< HEAD
+## Prerequisites
+
+Make sure these are installed before running the project:
+
+- Node.js
+- npm
+- Android Studio
+- Java JDK
+- Capacitor CLI
+
+## Run in Android Studio
+
+Run these commands **one by one** from your terminal.
+
+
+
+1. Build the web assets:
+
+   ```bash
+   npm run build
+   ```
+
+2. After the build succeeds, sync Capacitor with the Android project:
+
+   ```bash
+   npx cap sync android
+   ```
+
+3. Open the project in Android Studio:
+
+   ```bash
+   npx cap open android
+   ```
+
+From Android Studio you can run the app on an emulator or a connected device.
+=======
+# MatruSneh-Health-app
+Maternal healthcare mobile app for pregnancy support and health tracking.
+>>>>>>> 23234cda0f8786700c83bd8e292e00ec23e28c16
