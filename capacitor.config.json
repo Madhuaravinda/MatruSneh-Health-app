@@ -1,0 +1,12 @@
+{
+  "appId": "com.Matrusneh.health",
+  "appName": "MatruSneh",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "plugins": {
+    "LocalNotifications": {
+      "smallIcon": "ic_stat_matrusneh",
+      "iconColor": "#E91E63"
+    }
+  }
+}

@@ -1,0 +1,136 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. Global Safety Net: Default Deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Phase 3: Primitives & Helpers
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isVerified() {
+      // Mandate verified email for security
+      return isSignedIn() && request.auth.token.email_verified == true;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // --- Entity Validations ---
+
+    function isTimestamp(val) {
+      return val is timestamp;
+    }
+
+    function isValidProfile(data) {
+      return data.uid == request.auth.uid
+        && (data.name == null || data.name is string)
+        && (data.language == null || data.language in ['kn', 'en'])
+        && (data.onboardingComplete == null || data.onboardingComplete is bool)
+        && (data.profileSetupComplete == null || data.profileSetupComplete is bool)
+        && (data.contactNumber == null || data.contactNumber is string)
+        && (data.emergencyContact == null || data.emergencyContact is string)
+        && (data.updatedAt == null || isTimestamp(data.updatedAt));
+    }
+
+    function isValidKickSession(data) {
+      return data.keys().hasAll(['id', 'userId', 'count', 'startTime'])
+        && data.keys().size() <= 10
+        && data.userId == request.auth.uid
+        && data.count is int && data.count >= 0 && data.count <= 1000
+        && data.startTime is string && data.startTime.size() <= 50;
+    }
+
+    function isValidNutritionLog(data) {
+      return data.keys().size() <= 15;
+    }
+
+    function isValidAppointment(data) {
+      return data.keys().hasAll(['id', 'userId', 'type', 'date', 'time'])
+        && data.keys().size() <= 10
+        && data.userId == request.auth.uid
+        && data.date is string && data.date.size() <= 20
+        && data.type is string && data.type.size() <= 50;
+    }
+
+    function isValidHealthRecord(data) {
+      return data.keys().hasAll(['id', 'userId', 'type', 'label'])
+        && data.keys().size() <= 12
+        && data.userId == request.auth.uid
+        && data.type in ['vaccination', 'lab', 'photo']
+        && data.label is string && data.label.size() <= 200
+        && (data.fileUrl == null || (data.fileUrl is string && data.fileUrl.size() <= 1000));
+    }
+
+    function isValidHealthAlert(data) {
+      return data.keys().hasAll(['id', 'userId', 'timestamp', 'symptoms', 'severity'])
+        && data.keys().size() <= 10
+        && data.userId == request.auth.uid
+        && data.symptoms is list
+        && data.severity in ['emergency', 'normal'];
+    }
+
+    // --- Routes ---
+
+    match /users/{userId} {
+      allow get: if isOwner(userId);
+      allow create: if isOwner(userId) && isValidProfile(incoming());
+      allow update: if isOwner(userId) && isValidProfile(incoming());
+
+      match /kick_sessions/{sessionId} {
+        allow list: if isOwner(userId);
+        allow get: if isOwner(userId) && isValidId(sessionId);
+        allow create: if isOwner(userId) && isValidId(sessionId) && isValidKickSession(incoming());
+        allow delete: if isOwner(userId) && isValidId(sessionId);
+      }
+
+      match /nutrition/{date=**} {
+        allow read, write: if isSignedIn() && request.auth.uid == userId;
+      }
+
+      match /appointments/{appointmentId} {
+        allow list: if isOwner(userId);
+        allow get: if isOwner(userId) && isValidId(appointmentId);
+        allow create: if isOwner(userId) && isValidId(appointmentId) && isValidAppointment(incoming());
+        allow update: if isOwner(userId) && isValidId(appointmentId) && isValidAppointment(incoming())
+          && (
+            // Action: Edit details
+            incoming().diff(existing()).affectedKeys().hasOnly(['type', 'date', 'time', 'location', 'reminders', 'completed'])
+          );
+        allow delete: if isOwner(userId) && isValidId(appointmentId);
+      }
+
+      match /health_alerts/{alertId} {
+        allow list: if isOwner(userId);
+        allow get: if isOwner(userId) && isValidId(alertId);
+        allow create: if isOwner(userId) && isValidId(alertId) && isValidHealthAlert(incoming());
+        allow delete: if isOwner(userId) && isValidId(alertId);
+      }
+
+      match /health_records/{recordId} {
+        allow list: if isOwner(userId);
+        allow get: if isOwner(userId) && isValidId(recordId);
+        allow create: if isOwner(userId) && isValidId(recordId) && isValidHealthRecord(incoming());
+        allow update: if isOwner(userId) && isValidId(recordId) && isValidHealthRecord(incoming())
+          && incoming().diff(existing()).affectedKeys().hasOnly(['label', 'date', 'value', 'status', 'fileUrl', 'fileType']);
+        allow delete: if isOwner(userId) && isValidId(recordId);
+      }
+    }
+  }
+}

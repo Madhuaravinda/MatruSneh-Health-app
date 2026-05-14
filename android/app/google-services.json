@@ -1,0 +1,28 @@
+{
+  "project_info": {
+    "project_number": "412899986517",
+    "project_id": "banded-anvil-490608-a4"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:412899986517:android:7ce3afc165d3f08a6b58dc",
+        "android_client_info": {
+          "package_name": "com.Matrusneh.health"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "412899986517-9q4u5g8u7j8g9k9j2ur5812i7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSyiBYVwa855zrNqqRR9yfgAkWRb8WK1A"
+        }
+      ]
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,60 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Noto+Sans+Kannada:wght@400;700&display=swap');
+
+@theme {
+  --color-primary: #E91E63;
+  --color-primary-foreground: #FFFFFF;
+  --color-secondary: #4CAF50;
+  --color-secondary-foreground: #FFFFFF;
+  --color-accent: #FF9800;
+  --color-accent-foreground: #FFFFFF;
+  --color-background: #F8F9FA;
+  --color-foreground: #1A1A1A;
+  --color-card: #FFFFFF;
+  --color-card-foreground: #1A1A1A;
+  --color-muted: #F1F3F5;
+  --color-muted-foreground: #6C757D;
+  --color-border: #E9ECEF;
+  --color-input: #E9ECEF;
+
+  --font-sans: "Inter", "Noto Sans Kannada", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", "Noto Sans Kannada", sans-serif;
+
+  --radius-lg: 1rem;
+  --radius-md: 0.75rem;
+  --radius-sm: 0.25rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased text-[15px];
+    /* Safe area padding for PWA */
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  h1 {
+    @apply font-display font-bold tracking-tight text-xl;
+  }
+  h2 {
+    @apply font-display font-bold tracking-tight text-lg;
+  }
+  h3 {
+    @apply font-display font-semibold tracking-tight text-base;
+  }
+}
+
+/* Touch targets optimization */
+button, a {
+  @apply min-h-[40px] min-w-[40px];
+}
+
+@layer utilities {
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+
+

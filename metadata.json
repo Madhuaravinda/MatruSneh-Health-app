@@ -1,0 +1,13 @@
+{
+  "name": "Matru-Sneh Health",
+  "description": "A digital pregnancy companion designed for maternal health tracking in rural areas, supporting kick counting, nutrition monitoring, and appointment scheduling.",
+  "requestFramePermissions": [
+    "geolocation",
+    "camera"
+  ],
+  "majorCapabilities": [
+    "PWA",
+    "Offline Storage",
+    "Data Visualization"
+  ]
+}
