@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## Prerequisites
 
 Make sure these are installed before running the project:
@@ -37,3 +38,7 @@ Run these commands **one by one** from your terminal.
    ```
 
 From Android Studio you can run the app on an emulator or a connected device.
+=======
+# MatruSneh-Health-app
+Maternal healthcare mobile app for pregnancy support and health tracking.
+>>>>>>> 23234cda0f8786700c83bd8e292e00ec23e28c16
