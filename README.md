@@ -42,4 +42,4 @@ From Android Studio you can run the app on an emulator or a connected device.
 - [View Project Output Screenshots](https://drive.google.com/drive/folders/1BeFRxoBop4NBj6ENpFp09HBnsgCX1-KM?usp=drive_link)
 ## QR Code
 
-![QR Code](Screenshot 2026-05-15 161425.png)
+![QR Code](QRcode.png)
