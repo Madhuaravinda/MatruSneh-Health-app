@@ -37,6 +37,9 @@ Run these commands **one by one** from your terminal.
 
 From Android Studio you can run the app on an emulator or a connected device.
 =======
-# MatruSneh-Health-app
-Maternal healthcare mobile app for pregnancy support and health tracking.
->>>>>>> 23234cda0f8786700c83bd8e292e00ec23e28c16
+## Project Output 
+
+- [View Project Output Screenshots](https://drive.google.com/drive/folders/1BeFRxoBop4NBj6ENpFp09HBnsgCX1-KM?usp=drive_link)
+## QR Code
+
+![QR Code](Screenshot 2026-05-15 161425.png)
