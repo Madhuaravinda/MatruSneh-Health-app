@@ -16,7 +16,9 @@ Run these commands **one by one** from your terminal.
 
 
 1. Build the web assets:
-
+   ```bash
+   npm install
+   ```
    ```bash
    npm run build
    ```
