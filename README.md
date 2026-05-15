@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 ## Prerequisites
 
 Make sure these are installed before running the project:
