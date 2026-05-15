@@ -1,3 +1,32 @@
+# 🌸 Matru-Sneh Health – Maternal Healthcare Monitoring Application
+
+📌 ## Project Overview
+Matru-Sneh Health is a maternal healthcare monitoring Android application developed to support pregnant women through digital healthcare assistance. The application helps users monitor pregnancy progress, fetal movement, nutrition activities, healthcare appointments, and emergency health alerts through a simple and user-friendly interface suitable for rural and first-time smartphone users.
+
+✨ ## Features
+
+✔ User Authentication & Onboarding  
+🌐 Language Preference Selection  
+🤰 Pregnancy Journey Tracking  
+👶 Kick Counter Monitoring  
+🥗 Nutrition Tracker  
+🚨 Emergency Health Alerts  
+📅 Appointment Management & Reminder
+📱 Responsive and User-Friendly UI  
+📴 Offline Accessibility Support  
+
+🛠 ## Tech Stack
+
+- React.js
+- TypeScript
+- Tailwind CSS
+- Firebase Authentication
+- Firebase Cloud Database
+- Capacitor
+- Vite
+- Android Studio
+
+🚀 ## How to Run
 
 ## Prerequisites
 
